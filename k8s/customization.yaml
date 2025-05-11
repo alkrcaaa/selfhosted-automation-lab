@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - manifests/base/namespace.yaml
+
+  - manifests/gitea/pvc.yaml
+  - manifests/gitea/deployment.yaml
+  - manifests/gitea/service.yaml
+
+  - manifests/nextcloud/pvc.yaml
+  - manifests/nextcloud/deployment.yaml
+  - manifests/nextcloud/service.yaml
+
+  - manifests/home-assistant/pvc.yaml
+  - manifests/home-assistant/deployment.yaml
+  - manifests/home-assistant/service.yaml
+
+  - manifests/it-tools/deployment.yaml
+  - manifests/it-tools/service.yaml
+
+  - manifests/uptimekuma/pvc.yaml
+  - manifests/uptimekuma/deployment.yaml
+  - manifests/uptimekuma/service.yaml
+
+  - manifests/portainer/deployment.yaml
+  - manifests/portainer/service.yaml
+
+  - manifests/ttydbridge/deployment.yaml
+  - manifests/ttydbridge/service.yaml
+
+  - manifests/monitoring/netdata-daemonset.yaml
+  - manifests/monitoring/netdata-service.yaml

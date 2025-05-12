@@ -3,9 +3,6 @@ selfhosted-automation-lab A portable HomeLab blueprint showcasing self-hosted ap
 
 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)  
-[![Kubernetes](https://img.shields.io/badge/k3s-Ready-green.svg)](#kubernetes)  
-[![Docker Compose](https://img.shields.io/badge/Docker–Compose-Quickstart-blue.svg)](#quickstart)  
 
 > **A blueprint for your self-hosted homelab:**  
 > Deploy Gitea, Nextcloud, Home Assistant, it-tools, Uptime Kuma, Portainer, ttydBridge & Netdata  

@@ -1,9 +1,11 @@
 # selfhosted-automation-lab
 
+***⚠️ Project Status: This project is in its early stages and may contain bugs.If you encounter any issues or need help, please open an issue or contact me directly!*** 
+
 selfhosted-automation-lab is a portable HomeLab blueprint showcasing self-hosted applications and full automation with Docker Compose, Kubernetes (k3s), and Ansible. Deploy Gitea, Nextcloud, Home Assistant, Portainer, Uptime Kuma, it-tools, ttydBridge, and Netdata in minutes.
 
 > **A blueprint for your self-hosted homelab:**
-> Docker Compose → k3s Kubernetes → (soon) Ansible
+> **→ Ansible → k3s Kubernetes**
 
 ---
 

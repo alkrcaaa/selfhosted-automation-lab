@@ -1,0 +1,12 @@
+---
+- name: Download and install k3s
+  shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -
+  args:
+    creates: /usr/local/bin/k3s   # Eğer k3s zaten varsa bu komut atlanır
+
+- name: Ensure k3s service is running
+  service:
+    name: k3s
+    state: started
+    enabled: true

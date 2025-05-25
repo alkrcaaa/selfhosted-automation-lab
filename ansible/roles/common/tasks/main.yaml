@@ -1,0 +1,12 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install essential packages (git, curl, apt-transport-https)
+  apt:
+    name:
+      - git
+      - curl
+      - apt-transport-https
+    state: present

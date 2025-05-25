@@ -1,0 +1,53 @@
+# File: uninstall.yml (project root)
+---
+# uninstall.yml - Cleanup all Kubernetes workloads (pods, deployments, namespaces, CRDs)
+# Place this file at the root of the selfhosted-automation-lab project
+# This playbook deletes all Kubernetes resources but keeps OS packages intact.
+
+- name: Cleanup Kubernetes resources
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+  tasks:
+    - name: List current namespaces (for debugging)
+      shell: |
+        KUBECONFIG={{ kubeconfig }} kubectl get ns -o custom-columns=NAME:.metadata.name
+      register: ns_list
+
+    - name: Debug namespaces before deletion
+      debug:
+        var: ns_list.stdout_lines
+
+    - name: Remove all resources in non-system namespaces
+      shell: |
+        for ns in {{ ns_list.stdout_lines | join(' ') }}; do
+          if [[ ! "$ns" =~ ^(kube-system|kube-public|default|kube-node-lease)$ ]]; then
+            KUBECONFIG={{ kubeconfig }} kubectl delete ns "$ns" --ignore-not-found
+          fi
+        done
+      when: ns_list.stdout_lines is defined
+      ignore_errors: true
+
+    - name: Delete all remaining namespaced resources
+      shell: |
+        KUBECONFIG={{ kubeconfig }} kubectl delete all --all --all-namespaces --ignore-not-found
+      ignore_errors: true
+
+    - name: Delete all CustomResourceDefinitions (CRDs)
+      shell: |
+        KUBECONFIG={{ kubeconfig }} kubectl delete $(KUBECONFIG={{ kubeconfig }} kubectl get crd -o name) --ignore-not-found
+      ignore_errors: true
+
+    - name: Confirm cleanup
+      shell: |
+        KUBECONFIG={{ kubeconfig }} kubectl get all --all-namespaces || true
+      register: after_cleanup
+      failed_when: false
+
+    - name: Show remaining resources
+      debug:
+        var: after_cleanup.stdout_lines

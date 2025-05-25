@@ -1,0 +1,18 @@
+# File: install.yml (project root)
+---
+
+# 1. Import base playbook (OS & k3s setup)
+- import_playbook: ansible/site.yaml
+
+# 2. Deploy Kubernetes manifests
+- name: Deploy Kubernetes manifests
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: Apply all Kustomize manifests
+      shell: |
+        export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+        kubectl apply -k {{ playbook_dir }}/k8s/
+      args:
+        chdir: "{{ playbook_dir }}"

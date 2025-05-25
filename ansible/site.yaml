@@ -1,0 +1,9 @@
+---
+- name: Bootstrap Homelab – OS & k3s
+  hosts: all
+  connection: local
+  become: true
+
+  roles:
+    - common   # temel paketleri kur.
+    - k3s      # k3s ayağa kaldır.

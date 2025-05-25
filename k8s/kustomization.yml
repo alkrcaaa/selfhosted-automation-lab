@@ -23,11 +23,11 @@ resources:
   - manifests/uptimekuma/deployment.yaml
   - manifests/uptimekuma/service.yaml
 
-  - manifests/portainer/deployment.yaml
-  - manifests/portainer/service.yaml
+  # - manifests/portainer/deployment.yaml
+  # - manifests/portainer/service.yaml
 
-  - manifests/ttydbridge/deployment.yaml
-  - manifests/ttydbridge/service.yaml
+  # - manifests/ttydbridge/deployment.yaml
+  # - manifests/ttydbridge/service.yaml
 
-  - manifests/monitoring/netdata-daemonset.yaml
-  - manifests/monitoring/netdata-service.yaml
+  # - manifests/monitoring/netdata-daemonset.yaml
+  # - manifests/monitoring/netdata-service.yaml
